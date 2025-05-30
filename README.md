@@ -46,11 +46,11 @@ If you don't have the 4.5 gigabytes necessary to install all this, or if your co
 
 ### Method 1: via Gitpod.
 
-Just click here: [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/b-mehta/formalising-mathematics-notes)
+Just click here: [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kumj2028/formalising-mathematics-notes)
 
 ### Method 2: via Codespaces
 
-Just click here: [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/b-mehta/formalising-mathematics-notes)
+Just click here: [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/kumj2028/formalising-mathematics-notes)
 
 ## Course notes
 
