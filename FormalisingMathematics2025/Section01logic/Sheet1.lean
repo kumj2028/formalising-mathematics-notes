@@ -50,8 +50,8 @@ first logic section is to get you up to speed with ten very basic ones.
 ## Worked examples
 
 Click around in the proofs to see the tactic state (on the right) change.
-The tactic is implemented and the state changes just before the newline or semicolon (`;`).
-I will use the following conventions: variables with capital
+The tactic is implemented and the state changes just before the newline or
+semicolon (`;`). I will use the following conventions: variables with capital
 letters like `P`, `Q`, `R` denote propositions
 (i.e. true/false statements) and variables whose names begin
 with `h` like `h1` or `hP` are proofs or hypotheses.
@@ -64,14 +64,16 @@ variable (P Q R : Prop)
 -- Here are some examples of `intro`, `exact` and `apply` being used.
 -- Assume that `P` and `Q` and `R` are all true. Deduce that `P` is true.
 example (hP : P) (hQ : Q) (hR : R) : P := by
-  -- note that `exact P` does *not* work. `P` is the proposition, `hP` is the proof.
+  -- note that `exact P` does *not* work. `P` is the proposition,
+  -- `hP` is the proof.
   exact hP
   done
 
 -- Same example: assume that `P` and `Q` and `R` are true, but this time
 -- give the assumptions silly names. Deduce that `P` is true.
 example (fish : P) (giraffe : Q) (dodecahedron : R) : P := by
--- `fish` is the name of the assumption that `P` is true (but `hP` is a better name)
+-- `fish` is the name of the assumption that `P` is true (but `hP` is a
+-- better name)
   exact fish
   done
 
@@ -87,22 +89,25 @@ example (hQ : Q) : P → Q := by
 
 -- Assume `P → Q` and `P` is true. Deduce `Q`.
 example (h : P → Q) (hP : P) : Q := by
-  -- `hP` says that `P` is true, and `h` says that `P` implies `Q`, so `apply h at hP` will change
-  -- `hP` to a proof of `Q`.
+  -- `hP` says that `P` is true, and `h` says that `P` implies `Q`,
+  -- so `apply h at hP` will change `hP` to a proof of `Q`.
   apply h at hP
   -- now `hP` is a proof of `Q` so that's exactly what we want.
   exact hP
   done
 
--- The `apply` tactic always needs a hypothesis of the form `P → Q`. But instead of applying
--- it to a hypothesis `h : P` (which changes the hypothesis to a proof of `Q`), you can instead
--- just use a bare `apply h` and it will apply it to the *goal*, changing it from `Q` to `P`.
--- Here we are "arguing backwards" -- if we know that P implies Q, then to prove Q it suffices to
--- prove P.
+-- The `apply` tactic always needs a hypothesis of the form `P → Q`.
+-- But instead of applying it to a hypothesis `h : P` (which changes
+-- the hypothesis to a proof of `Q`), you can instead
+-- just use a bare `apply h` and it will apply it to the *goal*,
+-- changing it from `Q` to `P`.
+-- Here we are "arguing backwards" -- if we know that P implies Q,
+-- then to prove Q it suffices to prove P.
 
 -- Assume `P → Q` and `P` is true. Deduce `Q`.
 example (h : P → Q) (hP : P) : Q := by
-  -- `h` says that `P` implies `Q`, so to prove `Q` (our goal) it suffices to prove `P`.
+  -- `h` says that `P` implies `Q`, so to prove `Q` (our goal) it
+  -- suffices to prove `P`.
   apply h
   -- Our goal is now `⊢ P`.
   exact hP
@@ -118,8 +123,8 @@ Delete the `sorry`s and replace them with tactic proofs using `intro`,
 -/
 /-- Every proposition implies itself. -/
 example : P → P := by
-  intro h
-  exact h
+  intro banana
+  exact banana
   done
 
 /-
@@ -145,19 +150,28 @@ example : P → Q → P := by
 /-- If we know `P`, and we also know `P → Q`, we can deduce `Q`.
 This is called "Modus Ponens" by logicians. -/
 example : P → (P → Q) → Q := by
-  sorry
+  intro hP hPQ
+  apply hPQ at hP
+  exact hP
   done
 
 /-- `→` is transitive. That is, if `P → Q` and `Q → R` are true, then
   so is `P → R`. -/
 example : (P → Q) → (Q → R) → P → R := by
-  sorry
+  intro hPQ hQR hP
+  apply hPQ at hP
+  apply hQR at hP
+  exact hP
   done
 
 -- If `h : P → Q → R` with goal `⊢ R` and you `apply h`, you'll get
 -- two goals! Note that tactics operate on only the first goal.
 example : (P → Q → R) → (P → Q) → P → R := by
-  sorry
+  intro hPQR hPQ hP
+  apply hPQR
+  . exact hP
+  . apply hPQ
+    exact hP
   done
 
 /-
